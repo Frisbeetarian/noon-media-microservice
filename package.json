@@ -1,0 +1,16 @@
+{
+  "name": "media-microservice",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Muhammad <mohamad.sleimanhaidar@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "dependencies": {
+    "@noon/rabbit-mq-rpc": "^0.0.19",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1"
+  }
+}
