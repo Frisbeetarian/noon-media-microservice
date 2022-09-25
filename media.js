@@ -3,7 +3,9 @@ const rpcClient = require("./client");
 
 async function media(index, params) {
   switch (index) {
-    case "UPLOAD_PROFILE_IMAGE": {
+    case "UPLOAD_IMAGE": {
+      console.log("upload image index:", index);
+      console.log("upload image params:", params);
     }
 
     default: {

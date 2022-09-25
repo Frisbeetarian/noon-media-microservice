@@ -23,6 +23,7 @@ const client = new RPCClient({
 });
 
 let rpcClientInitialized = false;
+
 async function initRPCClient() {
   if (rpcClientInitialized) {
     return;
@@ -70,4 +71,4 @@ function returnMediaResult() {
   };
 }
 
-module.exports.returnEsResult = returnEsResult;
+module.exports.returnMediaResult = returnMediaResult;

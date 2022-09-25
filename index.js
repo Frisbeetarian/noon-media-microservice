@@ -1,5 +1,7 @@
 const { RPCServer } = require("@noon/rabbit-mq-rpc/server");
 const media = require("./media");
+const express = require("express");
+const path = require("path");
 
 const connectionObject = {
   protocol: "amqp",
@@ -40,3 +42,12 @@ async function establishRPCConsumer() {
 }
 
 establishRPCConsumer();
+
+let app = express();
+
+app.use("/images", express.static(path.join(__dirname + "/public")));
+// app.listen(4050);
+
+let server = app.listen(4060, () =>
+  console.log(`server listening at http://localhost:${4060}`)
+);
