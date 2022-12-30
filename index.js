@@ -45,7 +45,8 @@ establishRPCConsumer();
 
 let app = express();
 
-app.use("/images", express.static(path.join(__dirname + "/public")));
+app.use("/images", express.static(path.join(__dirname + "/public/images")));
+app.use("/audio", express.static(path.join(__dirname + "/public/audio")));
 // app.listen(4050);
 
 let server = app.listen(4060, () =>
