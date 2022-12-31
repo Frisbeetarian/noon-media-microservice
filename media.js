@@ -34,7 +34,7 @@ async function media(index, params) {
           binary
         );
 
-        return "http://localhost:4060/images/" + filename;
+        return process.env.URL + "/images/" + filename;
       } catch (e) {
         console.log("error:", e);
         return false;
@@ -57,7 +57,7 @@ async function media(index, params) {
           binary
         );
 
-        return "http://localhost:4060/audio/" + filename;
+        return process.env.URL + "/audio/" + filename;
       } catch (e) {
         console.log("error:", e);
         return false;
