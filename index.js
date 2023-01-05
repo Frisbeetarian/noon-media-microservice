@@ -2,6 +2,7 @@ const { RPCServer } = require("@noon/rabbit-mq-rpc/server");
 const media = require("./media");
 const express = require("express");
 const path = require("path");
+require("dotenv").config();
 
 const connectionObject = {
   protocol: "amqp",
@@ -12,6 +13,8 @@ const connectionObject = {
   locale: "en_US",
   vhost: "/",
 };
+
+console.log("env:", process.env.URL);
 
 async function establishRPCConsumer() {
   try {
@@ -52,6 +55,3 @@ app.use("/audio", express.static(path.join(__dirname + "/public/audio")));
 let server = app.listen(4060, () =>
   console.log(`server listening at http://localhost:${4060}`)
 );
-
-
-

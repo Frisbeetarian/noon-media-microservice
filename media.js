@@ -2,6 +2,7 @@ const rpcClient = require("./client");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
+const storeUpload = require("./storeUpload");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -18,29 +19,12 @@ async function media(index, params) {
   switch (index) {
     case "UPLOAD_IMAGE": {
       try {
-        console.log("upload image index:", index);
-        console.log("upload image params:", params);
-        console.log("upload image buffer:", params.image.buffer.data);
-        let date = new Date();
-        let filename = Math.floor(Date.now() / 1000) + ".jpg";
-
-        // fs.writeFile(filename, params.image, "binary", (err) => {
-        //   if (!err) console.log(`${filename} created successfully!`);
-        // });
-        let binary = Buffer.from(params.image.buffer.data, "base64");
-
-        fs.writeFileSync(
-          path.join(__dirname + "/public/images/") + filename,
-          binary
-        );
-
-        return process.env.URL + "/images/" + filename;
+        const file = await storeUpload(params.image, params.readStream);
+        return file;
       } catch (e) {
         console.log("error:", e);
         return false;
       }
-
-      // upload.single(params.image);
     }
 
     case "UPLOAD_AUDIO_RECORDING": {
