@@ -19,12 +19,11 @@ async function media(index, params) {
   switch (index) {
     case "UPLOAD_IMAGE": {
       try {
-        const file = await storeUpload(
+        return await storeUpload(
           "UPLOAD_IMAGE",
-          params.image,
+          params.file,
           params.readStream
         );
-        return file;
       } catch (e) {
         console.log("error:", e);
         return false;
@@ -33,12 +32,11 @@ async function media(index, params) {
 
     case "UPLOAD_AUDIO_RECORDING": {
       try {
-        const file = await storeUpload(
+        return await storeUpload(
           "UPLOAD_AUDIO",
           params.file,
           params.readStream
         );
-        return file;
         // console.log("upload audio recording index:", index);
         // console.log("upload audio recording params:", params);
         // console.log("upload audio recording buffer:", params.file.buffer.data);

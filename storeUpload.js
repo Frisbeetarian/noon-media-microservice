@@ -8,6 +8,8 @@ const Jimp = require("jimp");
 // const UPLOAD_DIRECTORY_URL = require('../../../config/UPLOAD_DIRECTORY_URL');
 const sharp = require("sharp");
 const storeUpload = async (task, file, readStream) => {
+  console.log("file:", file);
+
   try {
     const buffer = Buffer.from(readStream.data, "base64");
 
