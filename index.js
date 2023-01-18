@@ -14,8 +14,6 @@ const connectionObject = {
   vhost: "/",
 };
 
-console.log("env:", process.env.URL);
-
 async function establishRPCConsumer() {
   try {
     const rpcServer = new RPCServer({
