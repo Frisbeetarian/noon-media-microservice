@@ -17,11 +17,13 @@ async function media(index, params) {
   switch (index) {
     case "UPLOAD_IMAGE": {
       try {
-        return await storeUpload(
-          "UPLOAD_IMAGE",
-          params.file,
-          params.readStream
-        );
+        const path = await storeUpload("UPLOAD_IMAGE", params.file);
+
+        if (path) {
+          await rpcClient.returnMediaResult().returnFile(path, "image");
+        }
+
+        // sendSuccessNotification(path, "image");
       } catch (e) {
         console.log("error:", e);
         return false;

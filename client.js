@@ -1,4 +1,4 @@
-const { RPCClient } = require("@noon/rabbit-mq-rpc/client");
+const { RPCClient } = require("@noon/rabbit-mq-rpc");
 
 const connectionObject = {
   protocol: "amqp",
@@ -55,19 +55,24 @@ function returnMediaResult() {
   const channel = QUEUES.MEDIA_SERVER.channel;
 
   return {
-    // async returnProfile(profile) {
-    //     try {
-    //         const response = await searchRPCRequest(
-    //             channel,
-    //             "RPC_SEARCH_RESULTS_RECEIVED",
-    //             profile
-    //         );
-    //         return response;
-    //     } catch (e) {
-    //         console.log("error:", e);
-    //         return null;
-    //     }
-    // },
+    async returnFile(path, type) {
+      try {
+        const responseMessage = {
+          status: "success",
+          filePath: path,
+          type,
+        };
+
+        return await mediaRPCRequest(
+          channel,
+          "RPC_MEDIA_RESULTS_RECEIVED",
+          Buffer.from(JSON.stringify(responseMessage))
+        );
+      } catch (e) {
+        console.log("error:", e);
+        return null;
+      }
+    },
   };
 }
 

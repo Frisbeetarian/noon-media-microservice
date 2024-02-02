@@ -1,4 +1,4 @@
-const { RPCServer } = require("@noon/rabbit-mq-rpc/server");
+const { RPCServer } = require("@noon/rabbit-mq-rpc");
 const media = require("./media");
 const express = require("express");
 const path = require("path");
