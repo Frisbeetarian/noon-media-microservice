@@ -55,21 +55,35 @@ function returnMediaResult() {
   const channel = QUEUES.MEDIA_SERVER.channel;
 
   return {
-    async returnFile(path, type, conversationUuid, senderUuid, messageUuid) {
+    async returnFile(
+      path,
+      type,
+      conversationUuid,
+      conversationType,
+      senderUuid,
+      senderUsername,
+      messageUuid,
+      recipientUuid,
+      participants
+    ) {
       try {
         const responseMessage = {
           status: "success",
           filePath: path,
           type,
           conversationUuid: conversationUuid,
+          conversationType: conversationType,
           senderUuid: senderUuid,
+          senderUsername: senderUsername,
           messageUuid: messageUuid,
+          recipientUuid: recipientUuid,
+          participants: participants,
         };
 
         return await mediaRPCRequest(
           channel,
           "RPC_MEDIA_RESULTS_RECEIVED",
-          Buffer.from(JSON.stringify(responseMessage))
+          responseMessage
         );
       } catch (e) {
         console.log("error:", e);

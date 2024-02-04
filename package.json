@@ -9,7 +9,7 @@
     "start": "nodemon ./index.js"
   },
   "dependencies": {
-    "@noon/rabbit-mq-rpc": "0.0.33-alpha",
+    "@noon/rabbit-mq-rpc": "0.0.34-alpha",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
     "jimp": "^0.22.10",
@@ -20,6 +20,7 @@
     "prettier": "^3.2.2",
     "request": "^2.88.2",
     "sharp": "^0.33.2",
-    "shortid": "^2.2.16"
+    "shortid": "^2.2.16",
+    "uuid": "^8.3.2"
   }
 }

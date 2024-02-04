@@ -21,8 +21,10 @@ async function establishRPCConsumer() {
       hostId: "localhost",
       queue: "rpc_queue.noon.media",
       handleMessage: (index, params) => {
-        console.log("RPC_MEDIA_RECEIVED", { index });
-        return media(index, params);
+        console.log("RPC_MEDIA_RECEIVED", { index, params });
+        if (params.file) {
+          return media(index, params);
+        }
       },
     });
 
