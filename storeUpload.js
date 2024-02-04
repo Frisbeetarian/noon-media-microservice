@@ -9,22 +9,23 @@ const Jimp = require("jimp");
 const sharp = require("sharp");
 const baseURL = process.env.URL || "http://localhost:4060";
 
-const storeUpload = async (task, file, readStream) => {
-  console.log("file:", file);
-
+const storeUpload = async (task, file) => {
   try {
     const buffer = file.buffer;
+    console.log(task);
 
     if (task === "UPLOAD_IMAGE") {
+      const actualBuffer = Buffer.from(file.buffer.data);
       const outputPath = path.join(__dirname, "/public/images/", file.filename);
-      await sharp(buffer).toFile(outputPath);
+      await sharp(actualBuffer).toFile(outputPath);
       return `${baseURL}/images/${file.filename}`;
-    } else if (task === "UPLOAD_AUDIO") {
-      const filename = `${Math.floor(Date.now() / 1000)}.ogg`;
-      const outputPath = path.join(__dirname, "/public/audio/", filename);
-      fs.writeFileSync(outputPath, buffer);
-      return `${baseURL}/audio/${filename}`;
     }
+    // else if (task === "UPLOAD_AUDIO") {
+    //   const filename = `${Math.floor(Date.now() / 1000)}.ogg`;
+    //   const outputPath = path.join(__dirname, "/public/audio/", filename);
+    //   fs.writeFileSync(outputPath, buffer);
+    //   return `${baseURL}/audio/${filename}`;
+    // }
   } catch (e) {
     console.log("error:", e);
     throw e;

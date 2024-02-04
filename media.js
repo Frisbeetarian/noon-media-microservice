@@ -18,9 +18,17 @@ async function media(index, params) {
     case "UPLOAD_IMAGE": {
       try {
         const path = await storeUpload("UPLOAD_IMAGE", params.file);
+        console.log("path:", path);
 
         if (path) {
-          await rpcClient.returnMediaResult().returnFile(path, "image");
+          await rpcClient
+            .returnMediaResult()
+            .returnFile(
+              path,
+              "image",
+              params.conversationUuid,
+              params.senderUuid
+            );
         }
 
         // sendSuccessNotification(path, "image");

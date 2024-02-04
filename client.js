@@ -55,12 +55,14 @@ function returnMediaResult() {
   const channel = QUEUES.MEDIA_SERVER.channel;
 
   return {
-    async returnFile(path, type) {
+    async returnFile(path, type, conversationUuid, senderUuid) {
       try {
         const responseMessage = {
           status: "success",
           filePath: path,
           type,
+          conversationUuid: conversationUuid,
+          senderUuid: senderUuid,
         };
 
         return await mediaRPCRequest(
