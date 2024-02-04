@@ -27,7 +27,8 @@ async function media(index, params) {
               path,
               "image",
               params.conversationUuid,
-              params.senderUuid
+              params.senderUuid,
+              params.messageUuid
             );
         }
 
