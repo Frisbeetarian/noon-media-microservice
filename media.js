@@ -44,6 +44,21 @@ async function media(index, params) {
     case "UPLOAD_AUDIO_RECORDING": {
       try {
         const path = await storeUpload("UPLOAD_AUDIO_RECORDING", params.file);
+
+        if (path) {
+          await rpcClient
+            .returnMediaResult()
+            .returnFile(
+              path,
+              "audio",
+              params.conversationUuid,
+              params.conversationType,
+              params.senderProfileUuid,
+              params.senderProfileUsername,
+              params.messageUuid,
+              params.participantUuids
+            );
+        }
       } catch (e) {
         console.log("error:", e);
         return false;
