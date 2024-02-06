@@ -60,11 +60,10 @@ function returnMediaResult() {
       type,
       conversationUuid,
       conversationType,
-      senderUuid,
-      senderUsername,
+      senderProfileUuid,
+      senderProfileUsername,
       messageUuid,
-      recipientUuid,
-      participants
+      participantUuids
     ) {
       try {
         const responseMessage = {
@@ -73,11 +72,10 @@ function returnMediaResult() {
           type,
           conversationUuid: conversationUuid,
           conversationType: conversationType,
-          senderUuid: senderUuid,
-          senderUsername: senderUsername,
+          senderProfileUuid: senderProfileUuid,
+          senderProfileUsername: senderProfileUsername,
           messageUuid: messageUuid,
-          recipientUuid: recipientUuid,
-          participants: participants,
+          participantUuids: participantUuids,
         };
 
         return await mediaRPCRequest(

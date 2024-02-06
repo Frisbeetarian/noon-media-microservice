@@ -18,7 +18,6 @@ async function media(index, params) {
     case "UPLOAD_IMAGE": {
       try {
         const path = await storeUpload("UPLOAD_IMAGE", params.file);
-        console.log("path:", path);
 
         if (path) {
           await rpcClient
@@ -28,11 +27,10 @@ async function media(index, params) {
               "image",
               params.conversationUuid,
               params.conversationType,
-              params.senderUuid,
-              params.senderUsername,
+              params.senderProfileUuid,
+              params.senderProfileUsername,
               params.messageUuid,
-              params.recipientUuid,
-              params.participants
+              params.participantUuids
             );
         }
 
@@ -45,11 +43,7 @@ async function media(index, params) {
 
     case "UPLOAD_AUDIO_RECORDING": {
       try {
-        return await storeUpload(
-          "UPLOAD_AUDIO",
-          params.file,
-          params.readStream
-        );
+        const path = await storeUpload("UPLOAD_AUDIO_RECORDING", params.file);
       } catch (e) {
         console.log("error:", e);
         return false;

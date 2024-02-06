@@ -20,21 +20,18 @@ const storeUpload = async (task, file) => {
       const originalFilename = file.filename;
       const extension = path.extname(originalFilename);
       const uuidFilename = `${uuidv4()}${extension}`;
-
-      // const outputPath = path.join(
-      //   `${__dirname}, "/public/images/", ${uuidFilename}`
-      // );
-
       const outputPath = path.join(__dirname, "public", "images", uuidFilename);
       await sharp(actualBuffer).toFile(outputPath);
       return `${baseURL}/images/${uuidFilename}`;
+    } else if (task === "UPLOAD_AUDIO_RECORDING") {
+      const originalFilename = file.filename;
+      const extension = path.extname(originalFilename);
+      const uuidFilename = `${uuidv4()}${extension}`;
+      // const filename = `${Math.floor(Date.now() / 1000)}.ogg`;
+      const outputPath = path.join(__dirname, "public", "audio", uuidFilename);
+      fs.writeFileSync(outputPath, buffer);
+      return `${baseURL}/audio/${uuidFilename}`;
     }
-    // else if (task === "UPLOAD_AUDIO") {
-    //   const filename = `${Math.floor(Date.now() / 1000)}.ogg`;
-    //   const outputPath = path.join(__dirname, "/public/audio/", filename);
-    //   fs.writeFileSync(outputPath, buffer);
-    //   return `${baseURL}/audio/${filename}`;
-    // }
   } catch (e) {
     console.log("error:", e);
     throw e;
