@@ -6,7 +6,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "nodemon index.js"
   },
   "dependencies": {
     "@noon/rabbit-mq-rpc": "0.0.34-alpha",

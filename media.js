@@ -39,8 +39,9 @@ async function media(index, params) {
         console.log("error:", e);
         return false;
       }
-    }
 
+      break;
+    }
     case "UPLOAD_AUDIO_RECORDING": {
       try {
         const path = await storeUpload("UPLOAD_AUDIO_RECORDING", params.file);
@@ -63,6 +64,8 @@ async function media(index, params) {
         console.log("error:", e);
         return false;
       }
+
+      break;
     }
 
     default: {

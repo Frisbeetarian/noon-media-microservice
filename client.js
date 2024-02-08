@@ -25,6 +25,7 @@ const client = new RPCClient({
 let rpcClientInitialized = false;
 
 async function initRPCClient() {
+  console.log("rpcClientInitialized:", rpcClientInitialized);
   if (rpcClientInitialized) {
     return;
   }

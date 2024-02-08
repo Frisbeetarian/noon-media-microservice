@@ -1,8 +1,10 @@
+require("dotenv").config();
+
 const { RPCServer } = require("@noon/rabbit-mq-rpc");
-const media = require("./media");
 const express = require("express");
 const path = require("path");
-require("dotenv").config();
+
+const media = require("./media");
 
 const connectionObject = {
   protocol: "amqp",
@@ -20,10 +22,16 @@ async function establishRPCConsumer() {
       connectionObject,
       hostId: "localhost",
       queue: "rpc_queue.noon.media",
-      handleMessage: (index, params) => {
-        console.log("RPC_MEDIA_RECEIVED", { index, params });
-        if (params.file) {
-          return media(index, params);
+      handleMessage: async (index, params) => {
+        try {
+          console.log("RPC_MEDIA_RECEIVED", { index, params });
+
+          if (params.file) {
+            return await media(index, params);
+          }
+        } catch (e) {
+          console.error("Error processing message:", e);
+          throw e;
         }
       },
     });
@@ -50,7 +58,6 @@ let app = express();
 
 app.use("/images", express.static(path.join(__dirname + "/public/images")));
 app.use("/audio", express.static(path.join(__dirname + "/public/audio")));
-// app.listen(4050);
 
 let server = app.listen(4060, () =>
   console.log(`server listening at http://localhost:${4060}`)
